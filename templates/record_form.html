@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Add Employee Record{% endblock %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">HISTORY</p><h1>Add Employee Record</h1></div></div>
+<div class="card form-card">
+<form method="post">
+<label>Employee<select required name="employee_id">
+<option value="">Select employee</option>
+{% for e in employees %}<option value="{{ e.id }}">{{ e.name }}</option>{% endfor %}
+</select></label>
+<label>Record Type<select required name="record_type">
+<option>Promotion</option><option>Attendance</option><option>Performance</option><option>Leave</option><option>Warning</option><option>Other</option>
+</select></label>
+<label>Description<textarea required name="description" rows="5" placeholder="Enter record details"></textarea></label>
+<label>Date<input required type="date" name="record_date"></label>
+<div class="form-actions"><a class="btn secondary" href="{{ url_for('records') }}">Cancel</a><button class="btn">Save Record</button></div>
+</form>
+</div>
+{% endblock %}

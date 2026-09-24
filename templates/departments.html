@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Departments{% endblock %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">ORGANIZATION</p><h1>Departments</h1></div></div>
+<div class="two-col">
+<div class="card">
+<h2>Add Department</h2>
+<form method="post">
+<label>Department Name<input required name="name" placeholder="e.g. Operations"></label>
+<button class="btn" type="submit">Add Department</button>
+</form>
+</div>
+<div class="card">
+<h2>Department List</h2>
+<div class="table-wrap"><table>
+<tr><th>Name</th><th>Employees</th><th>Action</th></tr>
+{% for d in departments %}
+<tr><td>{{ d.name }}</td><td>{{ d.employee_count }}</td><td>
+{% if d.employee_count == 0 %}
+<form method="post" action="{{ url_for('delete_department', id=d.id) }}">
+<button class="btn danger small">Delete</button>
+</form>
+{% else %}<span class="muted">In use</span>{% endif %}
+</td></tr>
+{% else %}<tr><td colspan="3">No departments.</td></tr>{% endfor %}
+</table></div>
+</div>
+</div>
+{% endblock %}

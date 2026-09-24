@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">EMPLOYEE</p><h1>{{ title }}</h1></div></div>
+<div class="card form-card">
+<form method="post">
+<div class="grid">
+<label>Full Name<input required name="name" value="{{ employee.name if employee else '' }}"></label>
+<label>Email<input required type="email" name="email" value="{{ employee.email if employee else '' }}"></label>
+<label>Phone<input name="phone" value="{{ employee.phone if employee else '' }}"></label>
+<label>Position<input required name="position" value="{{ employee.position if employee else '' }}"></label>
+<label>Department<select required name="department_id">
+<option value="">Select department</option>
+{% for d in departments %}
+<option value="{{ d.id }}" {% if employee and employee.department_id == d.id %}selected{% endif %}>{{ d.name }}</option>
+{% endfor %}
+</select></label>
+<label>Joining Date<input required type="date" name="joining_date" value="{{ employee.joining_date if employee else '' }}"></label>
+</div>
+<div class="form-actions">
+<a class="btn secondary" href="{{ url_for('employees') }}">Cancel</a>
+<button class="btn" type="submit">Save Employee</button>
+</div>
+</form>
+</div>
+{% endblock %}
